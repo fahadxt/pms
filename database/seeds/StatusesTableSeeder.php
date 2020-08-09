@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\TaskManager\Models\Status;
+use App\Models\statuses;
 
 class StatusesTableSeeder extends Seeder
 {
@@ -12,24 +12,29 @@ class StatusesTableSeeder extends Seeder
      */
     public function run()
     {
-        Status::create([
-            'name'  => 'To Do',
+        statuses::create([
+            'name'  => 'New',
+            'display_name'  => 'جديد',
             'color' => '#90cdf4',
         ]);
-        Status::create([
+        statuses::create([
             'name'  => 'In Progress',
+            'display_name'  => 'قيد الإجراء',
             'color' => '#d6bcfa',
         ]);
-        Status::create([
+        statuses::create([
             'name'  => 'In Review',
+            'display_name'  => 'قيد المراجعة',
             'color' => '#fbd38d',
         ]);
-        Status::create([
+        statuses::create([
             'name'  => 'Completed',
+            'display_name'  => 'مكتمل',
             'color' => '#9ae6b4',
         ]);
-        Status::create([
+        statuses::create([
             'name'  => 'Discarded',
+            'display_name'  => 'مهملة',
             'color' => '#feb2b2',
         ]);
     }

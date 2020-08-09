@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->boolean('active')->comment('is user active or deactivated');
             $table->string('password');
-            $table->string('timezone')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
