@@ -10,9 +10,13 @@ use App\Models\statuses;
 
 class Index extends Component
 {
+    protected $listeners = [
+        'taskCreated' => 'handleCreated',
+        'taskUpdated' => 'handleUpdated',
+    ];
     use WithPagination;
 
-    public $project;
+    public $project,$assigned_to;
 
     public function mount($project)
     {
@@ -24,18 +28,28 @@ class Index extends Component
     {
         $taskable_type = get_class($this->project);
         $taskable_id = $this->project->id;
+        $user_id = auth()->user()->id;
+        if(auth()->user()->hasRole('admin'))
+        {
+            $task = tasks::where('taskable_type',$taskable_type)->where('taskable_id', $taskable_id);
+        }else{
+            $task = tasks::where('taskable_type',$taskable_type)->where('taskable_id', $taskable_id)->where('assigned_to',$user_id);
+        }
+        $task = $task->latest()->paginate(18);
         return view('livewire.tasks.index',[
-            'tasks' => tasks::where('taskable_type',$taskable_type)->where('taskable_id', $taskable_id)->latest()->paginate(18),
+            'tasks' => $task,
             'data' =>$this->project
         ]);
     }
 
-    protected $listeners = [
-        'taskCreated' => 'handleCreated',
-    ];
+
 
     public function handleCreated($data)
     {
-        session()->flash('message', 'تم الإنشاء بنجاح 👍 ');
+        session()->flash('message', 'تم الإنشاء بنجاح 👍');
+    }
+    public function handleUpdated($data)
+    {
+        session()->flash('message', 'تم التعديل بنجاح 👍');
     }
 }

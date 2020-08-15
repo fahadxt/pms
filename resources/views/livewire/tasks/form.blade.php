@@ -1,26 +1,26 @@
 <div>
-    @include('layouts.alerts-error')
-
-    <div wire:ignore.self class="ui modal task">
+    <div wire:ignore.self class="ui modal task scrolling">
         <i id="close-icon" class="close icon"></i>
+        {{-- @dump($data) --}}
 
         <div class="header">
-            {{-- @if(!$tasks)
+            @if(!$data)
             {{__('Create')}}
-            @else --}}
+            @else
             {{__('Edit')}}
-            {{-- @endif --}}
+            @endif
         </div>
 
+        @include('layouts.alerts-error')
         <div class="content">
-            <form method="POST" enctype="multipart/form-data" class="ui large form project" wire:submit.prevent='store'>
+            <form method="POST" enctype="multipart/form-data" class="ui large form task" wire:submit.prevent='store'>
                 @csrf
                 <div class="ui equal width aligned padded grid">
 
-                    <div class="doubling one column row">
+                    <div class="doubling four column row">
                         <div class="column">
                             <label>{{__('projects.name')}}</label>
-                            <input type="text" name="name" wire:model.lazy='name'
+                            <input type="text" name="name" wire:dirty.class="text-red-500" wire:model.lazy='name'
                                 class="@error('name') error-form @enderror">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -28,6 +28,41 @@
                             </span>
                             @enderror
                         </div>
+
+                        <div class="column" wire:ignore>
+                            <label>{{__('Assigned To')}}</label>
+                            <select name="assigned_to" id="assigned_to" class="ui fluid selection dropdown search" wire:model.lazy='assigned_to'>
+                                <option value="" disabled selected>{{__('Select')}}</option>
+                                @foreach($usersData as $user)
+                                <option  value="{{$user->id}}">{{__($user->name)}}</option>
+                                @endForeach
+                            </select>
+                        </div>
+
+                        <div class="column" wire:ignore>
+                            <label class="mb-2">{{__('Due on')}}</label>
+                            <input type="text" name="due_on" id="due_on" class=" @error('due_on') error-form @enderror"
+                                wire:model.lazy='due_on'>
+
+                            @error('due_on')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        @if($data)
+                        <div class="column" wire:ignore>
+                            <label>{{__('Status')}}</label>
+                            <select name="status_id"
+                                class="ui fluid selection dropdown search " wire:model.lazy='status_id'>
+                                <option value="" disabled selected></option>
+                                @foreach($statuses as $status)
+                                <option value="{{$status->id}}">{{__($status->name)}}</option>
+                                @endForeach
+                            </select>
+                        </div>
+                        @endif
                     </div>
 
                     <div class="doubling one column row">
@@ -42,41 +77,10 @@
                             </span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="doubling one column row">
-                        <div class="column" wire:ignore>
-                            <label>{{__('Assigned To')}}</label>
-                            <select name="assigned_to" id="assigned_to"
-                                class="ui fluid selection dropdown search ">
-                                <option value="" disabled selected>{{__('Select')}}</option>
-                                @foreach($usersData as $user)
-                                    <option value="{{$user->id}}">{{__($user->name)}}</option>
-                                @endForeach
-                            </select>
-
-                            @error('assigned_to')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="doubling one column row">
-                        <div class="column" wire:ignore>
-                            <label class="mb-2">{{__('Due On')}}</label>
-                            <input type="text" name="due_on" id="due_on" class=" @error('due_on') error-form @enderror" 
-                             wire:model.lazy='due_on'>
-
-                            @error('due_on')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
+                    </div>              
 
                     <div class="actions">
-                        <button type="submit" class="ui positive right labeled icon button" wire:dirty.attr="disabled">
+                        <button type="submit" class="ui positive right labeled icon button" >
                             حفظ
                             <i class="checkmark icon"></i>
                         </button>

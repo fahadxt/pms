@@ -22,14 +22,11 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
-    // Route::resource('projects','ProjectsController');
-    // Route::post('/upload', 'ProjectsController@upload')->name('projects.upload');
-    // Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
     Route::livewire('/', 'home')->name('home');
     Route::livewire('/projects', 'projects.index')->name('projects.index');
     Route::livewire('/projects/{id}', 'projects.show')->name('projects.show');
-    Route::livewire('/dashboard', 'dashboard')->name('dashboard.index');
-
+    Route::livewire('/projects/{projectsid}/tasks/{id}', 'tasks.show')->name('tasks.show');
+    Route::livewire('/dashboard', 'dashboard.index')->name('dashboard.index');
 });
 
 Route::group(['prefix' => 'admin'], function () {

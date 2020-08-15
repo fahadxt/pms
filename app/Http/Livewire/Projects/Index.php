@@ -21,8 +21,21 @@ class Index extends Component
 
     public function render()
     {
+        $user_id = auth()->user()->id;
+        
+
+        $projects = projects::orderBy('created_at', 'desc');
+        if(auth()->user()->hasRole('user'))
+        {
+            $projects = $projects->whereHas('users', function ($query) use($user_id) {
+                $query->where('user_id', $user_id);
+            });
+        }
+
+
+        $projects= $projects->latest()->paginate(18);
         return view('livewire.projects.index', [
-            'data' => projects::latest()->paginate(18),
+            'data' => $projects,
             'usersData' => User::all(),
         ]);
     }
@@ -34,7 +47,6 @@ class Index extends Component
     }
     public function handleDeleted($data)
     {
-        dd('sd');
         session()->flash('message', 'تم الحذف بنجاح 👍 ');
     }
 

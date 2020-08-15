@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) { 
 //     return $request->user(); 
 // });
+
+Route::get('/tasks', 'DashboardController@tasks')->name('dashboard.tasks');
+Route::get('/top_5_users', 'DashboardController@top_5_users')->name('dashboard.top_5_users');

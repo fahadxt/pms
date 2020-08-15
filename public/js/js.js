@@ -38,6 +38,16 @@ $(function () {
 		}).modal("show");
 	});
 	$("#open-task").click(function () {
+		// $('#assigned_to').dropdown('restore defaults');
+		$(".ui.modal.task").modal({
+			closable: true,
+			autofocus: false,
+			observeChanges: false,
+			detachable: false,
+			transition: 'fade down',
+		}).modal("show");
+	});
+	$(".ui.card.task").click(function () {
 		$(".ui.modal.task").modal({
 			closable: true,
 			autofocus: false,
@@ -50,6 +60,19 @@ $(function () {
 
 
 });
+
+
+$(document).ready(function() {
+
+	
+	$('.ui.dropdown .remove.icon').on('click', function(e){
+		$(this).parent('.dropdown').dropdown('clear');
+		e.stopPropagation();
+	});	
+	
+});
+
+
 
 $(function () {
 	$(".ui.login.modal").modal({
@@ -75,9 +98,7 @@ $(document).ready(function() {
 
 
 
-function messageClose() {
-	$('.message .close').closest('.message').transition('fade')
-}
+
 
 $('.ui.form').form({
 	detachable: false,
@@ -98,9 +119,73 @@ $(function (){
 					type   : 'empty',
 				}]
 			},
+			users: {
+				identifier: 'users',
+				rules: [{
+					type   : 'minCount[1]',
+				}]
+			},
 		},
 		onSuccess: function() {
-			$('#users').dropdown('restore defaults', true);
+			return true; // false is required if you do don't want to let it submit                                            
+		},
+		onFailure: function() {
+			$(".ui.modal.project").modal({
+				closable: true,
+				autofocus: false,
+				observeChanges: false,
+				detachable: false,
+				transition: 'fade down',
+			}).modal("show");
+			return false; // false is required if you do don't want to let it submit                                            
+		}
+	}).submit( function( e ) {
+		$('#users').dropdown('restore defaults');
+		e.preventDefault();
+	});
+});
+
+$(function (){
+	$( ".ui.large.form.task" ).form({
+		fields: {
+			name: {
+				identifier: 'name',
+				rules: [{
+					type   : 'empty',
+				}]
+			},
+			description: {
+				identifier: 'description',
+				rules: [{
+					type   : 'empty',
+				}]
+			},
+			// assigned_to: {
+			// 	identifier: 'assigned_to',
+			// 	rules: [{
+			// 		type   : 'empty',
+			// 	}]
+			// },
+			due_on: {
+				identifier: 'due_on',
+				rules: [{
+					type   : 'empty',
+				}]
+			},
+		},
+		onSuccess: function() {
+			$('#assigned_to').dropdown('restore defaults');
+			return true; // false is required if you do don't want to let it submit                                            
+		},
+		onFailure: function() {
+			$(".ui.modal.task").modal({
+				closable: true,
+				autofocus: false,
+				observeChanges: false,
+				detachable: false,
+				transition: 'fade down',
+			}).modal("show");
+			return true; // false is required if you do don't want to let it submit                                            
 		}
 	}).submit( function( e ) {
 		e.preventDefault();

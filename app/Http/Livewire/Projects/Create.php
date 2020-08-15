@@ -43,6 +43,7 @@ class Create extends Component
         $this->validate([
             'name' => 'required|min:3|max:255',
             'description' => 'required',
+            'users' => 'required_without_all',
         ]);
 
 

@@ -209,6 +209,10 @@ article {
   padding: 10px;
 }
 
+.ui.modal{
+  position: fixed !important;
+}
+
 .ui.modal > .close {
   right: unset !important;
   // left: -2.5rem !important;
@@ -450,11 +454,12 @@ i.icon {
   -webkit-box-shadow: $box-shadow-1 !important;
   -moz-box-shadow: $box-shadow-1 !important;
   box-shadow: $box-shadow-1 !important;  
-  &:hover {
-    -webkit-box-shadow: $box-shadow-2 !important;
-    -moz-box-shadow: $box-shadow-2 !important;
-    box-shadow: $box-shadow-2 !important;
-  }
+  // &:hover {
+  //   -webkit-box-shadow: $box-shadow-2 !important;
+  //   -moz-box-shadow: $box-shadow-2 !important;
+  //   box-shadow: $box-shadow-2 !important;
+  // }
+
 
   .header{
     margin-bottom: .3em !important;
@@ -477,6 +482,26 @@ i.icon {
       color: #fff !important;
     }
   }
+  .header3{
+    margin-bottom: .3em !important;
+    height: 50px;
+    overflow: hidden;
+    background-color: #fff !important;
+    color: $primary !important;
+    padding: 0.6em !important;
+    font-weight: bolder;
+    font-size: medium;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 60px;
+    div{
+      display: flex;
+      align-items: center;
+      margin: 0 5px;
+    }
+  }
+  
 
   .content{
     border-top: none !important;
@@ -493,6 +518,19 @@ i.icon {
           font-family: "Font Awesome 5 Free"; 
           font-weight: 900; 
           content: "\f007";
+          padding-left: 10px;
+        }
+      }
+      .data2{
+        background: #e0e8ef;
+        font-weight: bolder;
+        color: #4c7092;
+        padding: 0.1em 0.3em;
+        border-radius: 9em;
+        &::after{
+          font-family: "Font Awesome 5 Free"; 
+          font-weight: 900; 
+          content: "\f104";
           padding-left: 10px;
         }
       }
@@ -554,6 +592,15 @@ i.icon {
 .ui.card.show{
   margin: 0 !important;
   width: 100%;
+  // overflow: hidden;
+}
+
+.ui.card{
+  .footer{
+    background-color: #f1f1f142;
+    border-top: 1px solid #e8e8e8;
+    padding: 0.5em;
+  }
 }
 
 .input-show{
@@ -564,8 +611,6 @@ i.icon {
   transition: color 0.1s ease, border-color 0.1s ease;
   max-height: 300px;
   overflow: auto;
-  margin: 1em;
-  
 }
 
 .menu2{
@@ -584,4 +629,131 @@ i.icon {
 }
 .border-bottom{
   border-bottom: 1px solid #eaeaea;
+}
+.alerts{
+  margin: 2.5em!important;
+}
+.ui.error.message{
+  .header{
+    text-align: start;
+  }
+}
+
+.text-red-500{
+  font-size: 50px;
+  color: #125293;
+}
+
+
+.my-modal{
+  background-color: #fff;
+  padding: 1em;
+}
+
+
+.flex-space{
+  display: flex !important;
+  justify-content: space-between !important;
+  .right{
+    direction: rtl;
+    text-align: right;
+  }
+  .left{
+    direction: ltr;
+    text-align: left;
+  }
+}
+
+.color-h{
+  color: #e2e2e2;
+    font-size: 11px !important;
+    margin: 0 !important;
+}
+
+.min-height-95{
+  min-height: 95px;
+}
+
+.ui.divider:not(.vertical):not(.horizontal){
+  border-top: 1px solid rgb(34 36 38 / 6%) !important;
+}
+
+.divider-style{
+  margin: 3em 0 0 0 !important;
+  font-size: larger !important;
+  color: $primary !important;
+  font-weight: bolder !important;
+}
+
+.fa, .fas{
+  font-family: "Font Awesome 5 Free" !important;
+}
+
+.ico-tex{
+  background-color: #125293;
+}
+// .rele{
+//   position: relative;
+// }
+.circle-icon{
+  position: relative;
+  &::after{
+    content: "";
+    border-radius: 1px;
+    height: 40px;
+    width: 40px;
+    background: #4c709229;
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    display: block;
+    z-index: -1;
+    transform: translateX(-50%);
+    border-radius: 50%;
+  }
+}
+
+.primary{
+  color: $primary !important;
+}
+
+.title3{
+  display: contents !important;
+  margin: 2px !important;
+}
+
+
+.new_card {
+  border-radius: 5px;
+  overflow: hidden;
+  .title-card{
+    background-color: $primary;
+    color: #fff;
+    height: 2.5em;
+    h5{
+      line-height: 2.285714em;
+    }
+  }
+  .st-col {
+    width: 49%;
+    align-self: center;
+  }
+  .st-divider {
+    width: 1px;
+    height: 110px;
+    background: #f7f7f7;
+    /* transform: skew(15deg); */
+  }
+}
+
+.box-shadow{
+  -webkit-box-shadow: $box-shadow-1 !important;
+  -moz-box-shadow: $box-shadow-1 !important;
+  box-shadow: $box-shadow-1 !important;  
+}
+
+
+#tasks{
+  padding: 1em;
+  height: 300px;
 }

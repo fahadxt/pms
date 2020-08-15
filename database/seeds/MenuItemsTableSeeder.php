@@ -179,14 +179,14 @@ class MenuItemsTableSeeder extends Seeder
         $menu = Menu::where('name', 'main')->firstOrFail();
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => 'الصفحة الرئيسية',
+            'title'   => 'Home',
             'url'     => '',
             'route'   => 'home',
         ]);
         if (!$menuItem->exists) {
             $menuItem->fill([
                 'target'     => '_self',
-                'icon_class' => 'fas fa-briefcase',
+                'icon_class' => 'fas fa-home',
                 'color'      => null,
                 'parent_id'  => null,
                 'order'      => 1,
@@ -195,14 +195,14 @@ class MenuItemsTableSeeder extends Seeder
         $menu = Menu::where('name', 'main')->firstOrFail();
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => 'المشاريع',
+            'title'   => 'Projects',
             'url'     => '',
             'route'   => 'projects.index',
         ]);
         if (!$menuItem->exists) {
             $menuItem->fill([
                 'target'     => '_self',
-                'icon_class' => 'voyager-list',
+                'icon_class' => 'fas fa-project-diagram',
                 'color'      => null,
                 'parent_id'  => null,
                 'order'      => 2,
@@ -211,14 +211,14 @@ class MenuItemsTableSeeder extends Seeder
         $menu = Menu::where('name', 'main')->firstOrFail();
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => 'لوحة المعلومات',
+            'title'   => 'Dashboard',
             'url'     => '',
             'route'   => 'dashboard.index',
         ]);
         if (!$menuItem->exists) {
             $menuItem->fill([
                 'target'     => '_self',
-                'icon_class' => 'voyager-list',
+                'icon_class' => 'fas fa-chart-bar',
                 'color'      => null,
                 'parent_id'  => null,
                 'order'      => 3,

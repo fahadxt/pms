@@ -1,8 +1,8 @@
 <div>
-    @include('layouts.alerts-error')
 
     <div wire:ignore.self class="ui modal project">
         <i id="close-icon" class="close icon"></i>
+        @include('layouts.alerts-error')
 
         <div class="header">
             @if(!$data)
@@ -18,36 +18,16 @@
                 @csrf
                 <div class="ui equal width aligned padded grid">
 
-                    <div class="doubling one column row">
+                    <div class="doubling three column row">
                         <div class="column">
-                            <label>{{__('projects.name')}}</label>
+                            <label class="@error('name') error-form @enderror" >{{__('projects.name')}}</label>
                             <input type="text" id="name" name="name"
-                                wire:model.lazy='name' class="@error('name') error-form @enderror">
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                wire:model.lazy='name'>
                         </div>
-                    </div>
 
-                    <div class="doubling one column row">
                         <div class="column">
-                            <label>{{__('projects.description')}}</label>
-                            <textarea name="description" id="description" cols="50" rows="9"
-                                class="form-control @error('description') error-form @enderror"
-                                wire:model.lazy='description'></textarea>
-                            @error('description')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="doubling one column row">
-                        <div class="column" wire:ignore>
-                            <label>{{__('projects.Joint users')}}</label>
+                            <label class="@error('users') error-form @enderror" >{{__('projects.Joint users')}}</label>
+                            <div wire:ignore>
                             <select name="users[]" multiple id="users"
                                 class="ui fluid multiple selection dropdown search " wire:model.lazy='users'>
                                 <option value="" disabled selected></option>
@@ -55,24 +35,31 @@
                                 <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endForeach
                             </select>
-                        </div>
-                    </div>
-
-                    @if($data)
-                        <div class="doubling one column row">
-                            <div class="column" wire:ignore>
-                                <label>{{__('Status')}}</label>
-                                <select name="status"
-                                    class="ui fluid selection dropdown search " wire:model.lazy='status'>
-                                    <option value="" disabled selected></option>
-                                    @foreach($statuses as $status)
-                                    <option value="{{$status->id}}">{{__($status->name)}}</option>
-                                    @endForeach
-                                </select>
                             </div>
                         </div>
-                    @endif
 
+                        @if($data)
+                        <div class="column">
+                            <label class="@error('status') error-form @enderror">{{__('Status')}}</label>
+                            <div wire:ignore>
+                            <select name="status"
+                                class="ui fluid selection dropdown search " wire:model.lazy='status'>
+                                <option value="" disabled selected></option>
+                                @foreach($statuses as $status)
+                                <option value="{{$status->id}}">{{__($status->name)}}</option>
+                                @endForeach
+                            </select>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+
+                    <div class="doubling one column row">
+                        <div class="column">
+                            <label class="@error('description') error-form @enderror">{{__('projects.description')}}</label>
+                            <textarea name="description" id="description" cols="50" rows="9" wire:model.lazy='description'></textarea>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="actions">

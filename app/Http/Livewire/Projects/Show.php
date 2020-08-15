@@ -34,6 +34,7 @@ class Show extends Component
         session()->flash('message', 'تم الحذف بنجاح 👍 ');
         redirect()->route('projects.index'); 
     }
+    
     public function deattach($id)
     {
         $project = projects::find($this->data->id);

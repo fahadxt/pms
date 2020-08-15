@@ -14,18 +14,22 @@
 
 
     {{-- Styles --}}
-    {{-- <link href="{{ asset('css/app.css') }}" type="text/css" rel="stylesheet"> --}}
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/semantic.min.css') }}">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
 
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
         rel="stylesheet">
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/amcharts4/core.js')}}"></script>
+    <script src="{{ asset('js/amcharts4/charts.js')}}"></script>
+    <script src="{{ asset('js/amcharts4/themes/animated.js')}}"></script> --}}
+
+    <script src="{{ asset('js/turbolinks.js') }}"></script>
+    <script src="{{ asset('js/head.js') }}"></script>
 
     @livewireStyles
-    @livewireScripts
 
 
     {{-- include jQuery library --}}
@@ -35,6 +39,7 @@
     {{-- flatpickr --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    @yield('stylesheet')
 </head>
 
 <body>
@@ -47,8 +52,12 @@
     </div>
 
 
+    @yield('script');
+
+
     <script src="{{ asset('js/semantic.min.js') }}"></script>
-    <script src="{{ asset('js/js.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+
 
     <!-- include FilePond library -->
     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
@@ -60,9 +69,11 @@
 
     <!-- include FilePond jQuery adapter -->
     <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+    
 
-
+    @livewireScripts
     @stack('scripts')
+
 </body>
 
 </html>

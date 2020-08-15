@@ -13,24 +13,37 @@ use App\User;
 class Form extends Component
 {
 
+    // protected $listeners = [
+    //     'taskID' => 'taskData',
+    // ];
+
     use WithPagination;
 
-    public  $name , $description , $assigned_to , $due_on , $status_id = 1 , $project , $users;
+    public  $name , $description , $assigned_to='' , $due_on , $status_id = 1 , $project , $users, $data;
     
-    public function mount($project)
+    public function mount( $project ,$data)
     {
-        $this->project = null;
+        $this->project = $project;
+        $this->data = null;
 
-        if($project){
-            $this->project = $project;
-
+        if($data){
+            $this->data = $data;
+            $this->name = $this->data->name;
+            $this->description = $this->data->description;
+            $this->assigned_to = $this->data->assigned_to;
+            $this->due_on = $this->data->due_on;
+            $this->status_id = $this->data->status_id;
+            $this->users = $this->project->users()->get()->pluck('id')->toArray();
         }
+
     }
+
+
 
     private function resetInput(){
         $this->name = null;
         $this->description = null;
-        $this->assigned_to = null;
+        $this->assigned_to = '';
         $this->due_on = null;
     }
 
@@ -56,16 +69,20 @@ class Form extends Component
             'taskable_id' => $this->project->id,
         ];
 
-        $createdData = tasks::create($data);
+        if($this->data) {
+            $updatedData = tasks::find($this->data->id);
+            $updatedData->update($data);
+            // $this->emit('taskUpdated' , $updatedData);
 
-        
-        $this->emit('taskCreated' , $createdData);
-        $this->resetInput();
-        // redirect()->route('projects.show',['id' => $this->project->id]); 
+            session()->flash('message', 'تم التعديل بنجاح 👍 ');
+            redirect()->route('tasks.show',['projectsid' => $this->project->id , 'id' => $this->data->id]); 
 
 
-        
-
+        }else{
+            $createdData = tasks::create($data);
+            $this->emit('taskCreated' , $createdData);
+            $this->resetInput();
+        }
     }
 
     public function render()

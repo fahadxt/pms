@@ -35,8 +35,8 @@
 
 // global.$ = global.jQuery = require('jquery');
 
-var Turbolinks = require("turbolinks")
-Turbolinks.start()
 
-// require('../../public/js/js');
 
+import 'alpinejs'
+// require('../../public/js/dashboard');
+require('../../public/js/js');

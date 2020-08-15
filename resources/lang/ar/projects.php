@@ -8,6 +8,6 @@ return [
     'name placeholder' => 'أدخل إسم المشروع',
     'description' => 'الوصف',
     'description placeholder' => 'أدخل وصف المشروع',
-    'Joint users' => 'المستخدمين المشتركون',
+    'Joint users' => 'المستخدمين المشتركين',
     'Select users' => 'حدد المستخدمين',
 ];
