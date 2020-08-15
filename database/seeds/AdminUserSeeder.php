@@ -16,8 +16,15 @@ class AdminUserSeeder extends Seeder
         $user = User::create([
             'role_id'    => 1,
             'name'       => 'Superadmin',
-            'username'   => 'superadmin',
             'email'      => 'superadmin@example.com',
+            'active'     => 1,
+            'password'   => bcrypt('123123123'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        $user = User::create([
+            'name'       => 'fahad',
+            'email'      => 'fahad@example.com',
             'active'     => 1,
             'password'   => bcrypt('123123123'),
             'created_at' => Carbon::now(),
