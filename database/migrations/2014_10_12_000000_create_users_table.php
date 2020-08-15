@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('designation')->nullable();
             $table->string('avatar')->nullable();
             $table->string('email')->unique();
-            $table->boolean('active')->comment('is user active or deactivated');
+            $table->boolean('active')->comment('is user active or deactivated')->default(true);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

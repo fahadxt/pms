@@ -30,5 +30,7 @@
     "No tasks for today": "لا يوجد ليدك مهام تسليمها اليوم",
     "Tasks completed": "المهام المنجزة",
     "Today": "اليوم",
+    "active": "مفعل",
+    "deactivated": "غير مفعل",
     "Top 5 users": "أبرز خمس أعضاء"
 }
