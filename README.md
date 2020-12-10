@@ -28,10 +28,10 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 This is a system it allows the project manager to create projects and add tasks to each employee in project with a simple dashboard.
 
 Clone the repo : `git clone https://github.com/fahadxt/pms`
-- Create new MySQL database for this application
+Create new MySQL database for this application
 `$ cd pms`
 `$ cp .env.example .env`
-- Set database credentials on .env file
+Set database credentials on .env file
 `$ php artisan key:generate`
 `$ composer install`
 `$ php artisan migrate --seed` (it has some seeded data - see in credentials)
